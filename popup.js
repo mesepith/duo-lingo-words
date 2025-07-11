@@ -4,14 +4,44 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     function: extractWords
   }, (results) => {
     const tableBody = document.querySelector("#wordsTable tbody");
-    results[0].result.forEach(({ word, meaning }) => {
+    const rows = results[0].result;
+
+    // Render table rows
+    rows.forEach(({ word, meaning }) => {
       const row = document.createElement("tr");
       row.innerHTML = `<td>${word}</td><td>${meaning}</td>`;
       tableBody.appendChild(row);
     });
+
+    // Copy to clipboard
+    document.getElementById("copyBtn").addEventListener("click", () => {
+      const header = "Word\tMeaning";
+      const text = rows.map(row => `${row.word}\t${row.meaning}`).join("\n");
+      const fullText = `${header}\n${text}`;
+      navigator.clipboard.writeText(fullText).then(() => {
+        const msg = document.getElementById("copiedMsg");
+        msg.style.display = "inline";
+        setTimeout(() => msg.style.display = "none", 5000);
+      });
+    });
+
+    // Download as Excel
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+      let csvContent = "data:text/csv;charset=utf-8,Word,Meaning\n";
+      csvContent += rows.map(e => `"${e.word}","${e.meaning}"`).join("\n");
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "words.csv"); // use .csv for Excel
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
   });
 });
 
+// Content script to extract words and meanings
 function extractWords() {
   const lis = document.querySelectorAll("ul._4JTMa > li");
   const data = [];

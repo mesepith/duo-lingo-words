@@ -5,6 +5,7 @@
     body {
       margin: 16px;
       font-family: sans-serif;
+      width: 400px;
     }
 
     h2 {
@@ -13,8 +14,8 @@
 
     table {
       width: 100%;
-      min-width: 350px;
       border-collapse: collapse;
+      margin-bottom: 16px;
     }
 
     th, td {
@@ -28,19 +29,27 @@
       background-color: #f2f2f2;
     }
 
-    td {
-      white-space: pre-wrap;
+    button {
+      margin-right: 10px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
   <h2>Extracted Words</h2>
+
   <table id="wordsTable">
     <thead>
       <tr><th>Word</th><th>Meaning</th></tr>
     </thead>
     <tbody></tbody>
   </table>
+
+  <button id="copyBtn">Copy</button>
+  <button id="downloadBtn">Download as Excel</button>
+  <span id="copiedMsg" style="display:none; color:green; margin-left:10px;">Copied!</span>
 
   <script src="popup.js"></script>
 </body>
