@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Duo Lingo Word Extractor",
   "version": "1.0",
-  "description": "Extract Spanish words and their meanings from a page and display them in a table.",
+  "description": "Extract words and meanings from Duolingo and view them in a simple table",
   "permissions": ["activeTab", "scripting"],
   "action": {
     "default_popup": "popup.html",
