@@ -1,4 +1,4 @@
-# Duo Lingo Word Extractor - Chrome Extension
+# Duo Lingo Word Extractor - Browser Extension
 
 A lightweight Chrome extension that extracts vocabulary words and their meanings from language learning sites like Duolingo and displays them in a clean, copyable, and downloadable table format.
 
