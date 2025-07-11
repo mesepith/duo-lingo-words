@@ -33,7 +33,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "words.csv"); // use .csv for Excel
+      link.setAttribute("download", "duolingo_words.csv"); // use .csv for Excel
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
