@@ -4,7 +4,8 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     function: extractWords
   }, (results) => {
     const tableBody = document.querySelector("#wordsTable tbody");
-    const rows = results[0].result;
+    const originalRows = results[0].result;
+    let currentRows = [...originalRows]; // This will hold the currently displayed/sorted data
 
     // Function to render table rows
     function renderTable(data) {
@@ -17,28 +18,30 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     }
 
     // Initial rendering (newest to oldest is default)
-    renderTable(rows);
+    renderTable(currentRows);
 
     // Sorting
     document.getElementById("sortBy").addEventListener("change", (e) => {
       const sortBy = e.target.value;
-      let sortedRows = [...rows]; // Create a copy to avoid modifying the original data
+      let sortedRows = [...originalRows]; // Always sort from a fresh copy of the original data
 
       if (sortBy === "oldest") {
         sortedRows.reverse();
       } else if (sortBy === "alphabetical") {
         sortedRows.sort((a, b) => a.word.localeCompare(b.word));
       }
-      // "newest" is the default, so no sorting needed
+      // "newest" is the default, which is the order of `sortedRows` already
 
-      renderTable(sortedRows);
+      currentRows = sortedRows; // Update the current state
+      renderTable(currentRows);
     });
 
     // Copy to clipboard
 
     document.getElementById("copyBtn").addEventListener("click", () => {
       const header = "Word\tMeaning";
-      const text = rows.map(row => `${row.word}\t${row.meaning}`).join("\n");
+      // Use the currently displayed (and sorted) rows
+      const text = currentRows.map(row => `${row.word}\t${row.meaning}`).join("\n");
       const fullText = `${header}\n${text}`;
       navigator.clipboard.writeText(fullText).then(() => {
         const msg = document.getElementById("copiedMsg");
@@ -50,7 +53,8 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     // Download as Excel
     document.getElementById("downloadBtn").addEventListener("click", () => {
       let csvContent = "data:text/csv;charset=utf-8,Word,Meaning\n";
-      csvContent += rows.map(e => `"${e.word}","${e.meaning}"`).join("\n");
+      // Use the currently displayed (and sorted) rows
+      csvContent += currentRows.map(e => `"${e.word}","${e.meaning}"`).join("\n");
 
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
