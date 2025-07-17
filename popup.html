@@ -1,98 +1,167 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
   <style>
-    body {
+     body {
       margin: 16px;
       font-family: sans-serif;
       width: 400px;
     }
 
-    h2 {
-      margin-bottom: 12px;
+    .container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 16px;
+    header {
+      background-color: #3897f0; 
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
     }
 
-    th, td {
-      border: 1px solid #ccc;
-      padding: 10px;
-      text-align: left;
-      vertical-align: top;
+    h1 {
+      margin: 0;
+      font-size: 1.5em;
     }
 
-    th {
-      background-color: #f2f2f2;
+    main {
+      flex: 1;
+      padding: 20px;
     }
 
     #sort-container {
       display: flex;
-      justify-content: flex-end;
-      align-items: center; /* Vertically align label and select */
-      margin-bottom: 10px;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: white;
+      border-radius: 6px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
 
     #sort-container label {
-      margin-right: 8px; /* Add space between label and dropdown */
-      font-size: 14px;   /* Match font size with dropdown */
+      margin-right: 10px;
+      font-weight: 500;
+      color: #555;
     }
 
     #sortBy {
-      padding: 6px 20px;
+      padding: 10px 12px;
       font-size: 14px;
-      border: 1px solid #ccc;
+      border: 1px solid #ddd;
       border-radius: 4px;
-      -webkit-appearance: none; /* Remove default styling */
+      background-color: #f9f9f9;
+      background-image: url("data:image/svg+xml;utf8,<svg fill='currentColor' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right -5px center;
+      cursor: pointer;
+      -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px; 
+      margin-bottom: 20px;
+    }
+
+    tbody tr {
       background-color: white;
-      background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>"); /* Add custom arrow */
-      background-repeat: no-repeat;
-      background-position-x: 100%;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    td {
+      padding: 12px 15px;
+      text-align: left;
+      border: none;
+    }
+
+    td:first-child {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    td:last-child {
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      color: #666;
+    }
+
+    footer {
+      padding: 20px;
+      text-align: right;
     }
 
     button {
-      margin-right: 10px;
-      padding: 6px 12px;
+      padding: 10px 15px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 4px;
       cursor: pointer;
-      font-size: 14px;    /* Keep existing font size */
-      transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
     }
-    #copyBtn{
-      color: rgb(0, 0, 0);         /* White text */
-      background-color: #ffffff; /* A shade of green */
-      border: 1px solid #000000;     /* Add a light border */
+
+    #copyBtn {
+      background-color: #e0e0e0;
+      color: #333;
     }
+
+    #copyBtn:hover {
+      background-color: #d0d0d0;
+    }
+
     #downloadBtn {
-      color: white;         /* White text */
-      background-color: #4CAF50; /* A shade of green */
-      border: none;          /* Remove default border */
-      border-radius: 4px;    /* Slightly rounded corners */
+      background-color: #5cb85c;
+      color: white;
+    }
+
+    #downloadBtn:hover {
+      background-color: #4cae4c;
     }
   </style>
 </head>
 <body>
-  <h2>Extracted Words</h2>
+  <div class="container">
+    <header>
+      <h1>Extracted Words</h1>
+    </header>
 
-  <div id="sort-container">
-    <label for="sortBy">Sort by:</label>
-    <select id="sortBy">
-      <option value="newest">Newest to Oldest</option>
-      <option value="oldest">Oldest to Newest</option>
-      <option value="alphabetical">Alphabetical</option>
-    </select>
+    <main>
+      <div id="sort-container">
+        <label for="sortBy"></label>
+        <select id="sortBy">
+          <option value="newest">Newest to Oldest</option>
+          <option value="oldest">Oldest to Newest</option>
+          <option value="alphabetical">Alphabetical</option>
+        </select>
+      </div>
+
+      <table id="wordsTable">
+        <tbody></tbody>
+      </table>
+    </main>
+
+    <footer>
+      <button id="copyBtn">Copy</button>
+      <button id="downloadBtn">Download</button>
+    </footer>
   </div>
-  <table id="wordsTable">
-    <tbody></tbody>
-  </table>
-  <button id="copyBtn">Copy</button>
-  <button id="downloadBtn">Download</button>
-  <span id="copiedMsg" style="display:none; color:green; margin-left:10px;">Copied!</span>
 
-  <script src="popup.js"></script>
+  <script src="popup.js"></script> 
 </body>
 </html>
