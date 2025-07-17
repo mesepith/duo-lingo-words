@@ -6,14 +6,36 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tableBody = document.querySelector("#wordsTable tbody");
     const rows = results[0].result;
 
-    // Render table rows
-    rows.forEach(({ word, meaning }) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `<td>${word}</td><td>${meaning}</td>`;
-      tableBody.appendChild(row);
+    // Function to render table rows
+    function renderTable(data) {
+      tableBody.innerHTML = ""; // Clear existing rows
+      data.forEach(({ word, meaning }) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${word}</td><td>${meaning}</td>`;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Initial rendering (newest to oldest is default)
+    renderTable(rows);
+
+    // Sorting
+    document.getElementById("sortBy").addEventListener("change", (e) => {
+      const sortBy = e.target.value;
+      let sortedRows = [...rows]; // Create a copy to avoid modifying the original data
+
+      if (sortBy === "oldest") {
+        sortedRows.reverse();
+      } else if (sortBy === "alphabetical") {
+        sortedRows.sort((a, b) => a.word.localeCompare(b.word));
+      }
+      // "newest" is the default, so no sorting needed
+
+      renderTable(sortedRows);
     });
 
     // Copy to clipboard
+
     document.getElementById("copyBtn").addEventListener("click", () => {
       const header = "Word\tMeaning";
       const text = rows.map(row => `${row.word}\t${row.meaning}`).join("\n");

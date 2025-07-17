@@ -29,6 +29,32 @@
       background-color: #f2f2f2;
     }
 
+    #sort-container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center; /* Vertically align label and select */
+      margin-bottom: 10px;
+    }
+
+    #sort-container label {
+      margin-right: 8px; /* Add space between label and dropdown */
+      font-size: 14px;   /* Match font size with dropdown */
+    }
+
+    #sortBy {
+      padding: 6px 20px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      -webkit-appearance: none; /* Remove default styling */
+      -moz-appearance: none;
+      appearance: none;
+      background-color: white;
+      background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>"); /* Add custom arrow */
+      background-repeat: no-repeat;
+      background-position-x: 100%;
+    }
+
     button {
       margin-right: 10px;
       padding: 6px 12px;
@@ -40,13 +66,17 @@
 <body>
   <h2>Extracted Words</h2>
 
+  <div id="sort-container">
+    <label for="sortBy">Sort by:</label>
+    <select id="sortBy">
+      <option value="newest">Newest to Oldest</option>
+      <option value="oldest">Oldest to Newest</option>
+      <option value="alphabetical">Alphabetical</option>
+    </select>
+  </div>
   <table id="wordsTable">
-    <thead>
-      <tr><th>Word</th><th>Meaning</th></tr>
-    </thead>
     <tbody></tbody>
   </table>
-
   <button id="copyBtn">Copy</button>
   <button id="downloadBtn">Download</button>
   <span id="copiedMsg" style="display:none; color:green; margin-left:10px;">Copied!</span>

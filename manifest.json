@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Duo Lingo Word Extractor",
+  "name": "DuoLingo Word Extractor",
   "version": "1.0",
   "description": "Extract words and meanings from Duolingo and view them in a simple table",
   "permissions": ["activeTab", "scripting"],
