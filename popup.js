@@ -5,23 +5,29 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   if (currentTab.url === duolingoWordsUrl) {
     displayMessage("Loading words...", true);
     tryExtractWords(currentTab.id, 0);
+  } else if (currentTab.url.includes("duolingo.com")) {
+    // If we're on Duolingo but not on the words page
+    chrome.tabs.update(currentTab.id, { url: duolingoWordsUrl });
+    const message = "Redirecting to words page...";
+    displayMessage(message, true);
+    
+    chrome.tabs.onUpdated.addListener(function listener(tabId, info) {
+      if (tabId === currentTab.id && info.status === 'complete') {
+        chrome.tabs.onUpdated.removeListener(listener);
+        setTimeout(() => {
+          displayMessage("Loading words...", true);
+          tryExtractWords(currentTab.id, 0);
+        }, 1000);
+      }
+    });
   } else {
-    const message = `This extension only works on ${duolingoWordsUrl}. Redirecting you there in 5 seconds...`;
+    // If we're not on Duolingo at all
+    const message = `This extension only works on Duolingo Words page.\n\nRedirecting you to Duolingo Words in 6 seconds...\n\nAfter the page loads, please click the extension icon again to view your words.`;
     displayMessage(message);
+    
     setTimeout(() => {
       chrome.tabs.update(currentTab.id, { url: duolingoWordsUrl });
-      // Wait for the page to load and then try to extract words
-      chrome.tabs.onUpdated.addListener(function listener(tabId, info) {
-        if (tabId === currentTab.id && info.status === 'complete') {
-          chrome.tabs.onUpdated.removeListener(listener);
-          setTimeout(() => {
-            displayMessage("Loading words...", true);
-            tryExtractWords(currentTab.id, 0);
-          }, 1000); // Give an extra second for the content to load
-        }
-      });
-    }, 5000);
-    return;
+    }, 6000);
   }
 });
 
@@ -117,8 +123,15 @@ function handleError(message) {
 
 function displayMessage(message, isLoading = false) {
   const messageContainer = document.getElementById("message-container");
-  messageContainer.textContent = message;
+  // Replace newlines with HTML line breaks for better formatting
+  messageContainer.innerHTML = message.replace(/\n/g, '<br>');
   messageContainer.style.display = "block";
+  messageContainer.style.padding = "20px";
+  messageContainer.style.backgroundColor = "white";
+  messageContainer.style.borderRadius = "8px";
+  messageContainer.style.boxShadow = "0 2px 4px rgba(0, 0, 0, 0.1)";
+  messageContainer.style.maxWidth = "80%";
+  messageContainer.style.lineHeight = "1.5";
 
   // Hide main content only if not in loading state
   if (!isLoading) {
