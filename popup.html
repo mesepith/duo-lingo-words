@@ -133,9 +133,27 @@
     #downloadBtn:hover {
       background-color: #4cae4c;
     }
+
+    .footer-actions {
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    .button-wrapper {
+      text-align: center;
+    }
+
+    .feedback-msg {
+      display: block; /* Puts the message on its own line */
+      visibility: hidden; /* Hides it, but it still takes up layout space */
+      min-height: 1.2em; /* Ensures a minimum space is reserved */
+      margin-top: 4px; /* Space between button and message */
+      color: #5cb85c;
+      font-weight: 500;
+    }
   </style>
 </head>
-<body>
+<body> 
   <div class="container">
     <header>
       <h1>Extracted Words</h1>
@@ -143,7 +161,7 @@
 
     <main>
       <div id="sort-container">
-        <label for="sortBy"></label>
+        <label for="sortBy">Sort By</label>
         <select id="sortBy">
           <option value="newest">Newest to Oldest</option>
           <option value="oldest">Oldest to Newest</option>
@@ -157,11 +175,18 @@
     </main>
 
     <footer>
-      <button id="copyBtn">Copy</button>
-      <button id="downloadBtn">Download</button>
+      <div class="footer-actions">
+        <div class="button-wrapper">
+          <button id="copyBtn">Copy</button>
+          <span id="copiedMsg" class="feedback-msg">Copied!</span>
+        </div>
+        <div class="button-wrapper">
+          <button id="downloadBtn">Download</button><span id="downloadedMsg" class="feedback-msg">Downloaded!</span>
+        </div>
+      </div>
     </footer>
   </div>
 
-  <script src="popup.js"></script> 
+  <script src="popup.js"></script>
 </body>
 </html>

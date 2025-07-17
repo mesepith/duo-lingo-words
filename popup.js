@@ -45,8 +45,10 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const fullText = `${header}\n${text}`;
       navigator.clipboard.writeText(fullText).then(() => {
         const msg = document.getElementById("copiedMsg");
-        msg.style.display = "inline";
-        setTimeout(() => msg.style.display = "none", 5000);
+        msg.style.visibility = "visible";
+        setTimeout(() => msg.style.visibility = "hidden", 5000);
+      }).catch(err => {
+        console.error("Failed to copy text: ", err);
       });
     });
 
@@ -63,6 +65,10 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+
+      const msg = document.getElementById("downloadedMsg");
+      msg.style.visibility = "visible";
+      setTimeout(() => msg.style.visibility = "hidden", 5000); // Hide after 5 seconds
     });
   });
 });
