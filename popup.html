@@ -59,7 +59,19 @@
       margin-right: 10px;
       padding: 6px 12px;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 14px;    /* Keep existing font size */
+      transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    }
+    #copyBtn{
+      color: rgb(0, 0, 0);         /* White text */
+      background-color: #ffffff; /* A shade of green */
+      border: 1px solid #000000;     /* Add a light border */
+    }
+    #downloadBtn {
+      color: white;         /* White text */
+      background-color: #4CAF50; /* A shade of green */
+      border: none;          /* Remove default border */
+      border-radius: 4px;    /* Slightly rounded corners */
     }
   </style>
 </head>
