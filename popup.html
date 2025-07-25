@@ -193,6 +193,59 @@
       height: 8px;
       background-color: #5cb85c;
     }
+
+    .download-wrapper {
+      position: relative;
+    }
+
+    .download-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      min-width: 160px;
+      z-index: 1000;
+      overflow: hidden;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .download-wrapper:hover .download-dropdown {
+      display: block;
+    }
+
+    .download-option {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      text-align: left;
+      background: none;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      color: #333;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      min-width: auto;
+    }
+
+    .download-option:hover {
+      background-color: #f8f9fa;
+      color: #5cb85c;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .download-option:not(:last-child) {
+      border-bottom: 1px solid #eee;
+    }
   </style>
 </head>
 <body>
@@ -217,8 +270,13 @@
             <button id="copyBtn">Copy</button>
             <span id="copiedMsg" class="feedback-msg">Copied!</span>
           </div>
-          <div class="button-wrapper">
+          <div class="button-wrapper download-wrapper">
             <button id="downloadBtn">Download</button>
+            <div class="download-dropdown">
+              <button class="download-option" data-format="txt">Text (.txt)</button>
+              <button class="download-option" data-format="csv">Excel (.csv)</button>
+              <button class="download-option" data-format="xlsx">Excel (.xlsx)</button>
+            </div>
             <span id="downloadedMsg" class="feedback-msg">Downloaded!</span>
           </div>
         </div>

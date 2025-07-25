@@ -98,19 +98,49 @@ function tryExtractWords(tabId, attempt) {
       });
     });
 
-    // Download as Excel
-    document.getElementById("downloadBtn").addEventListener("click", () => {
-      let csvContent = "data:text/csv;charset=utf-8,Word,Meaning\n";
-      csvContent += currentRows.map(e => `"${e.word}","${e.meaning}"`).join("\n");
+    // Handle downloads in different formats
+    document.querySelectorAll('.download-option').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const format = e.target.dataset.format;
+        let content = '';
+        let mimeType = '';
+        let fileName = `duolingo_words.${format}`;
 
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "duolingo_words.csv");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      showFeedback("downloadedMsg");
+        switch (format) {
+          case 'txt':
+            content = 'Word\tMeaning\n' + currentRows.map(row => `${row.word}\t${row.meaning}`).join('\n');
+            mimeType = 'text/plain';
+            break;
+          case 'csv':
+            content = 'Word,Meaning\n' + currentRows.map(row => `"${row.word}","${row.meaning}"`).join('\n');
+            mimeType = 'text/csv';
+            break;
+          case 'xlsx':
+            // For XLSX, we'll create a CSV that Excel can open
+            content = 'Word,Meaning\n' + currentRows.map(row => `"${row.word}","${row.meaning}"`).join('\n');
+            mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+            fileName = 'duolingo_words.xlsx';
+            break;
+        }
+
+        const blob = new Blob([content], { type: mimeType });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+        showFeedback("downloadedMsg");
+      });
+    });
+
+    // Show dropdown on download button click
+    document.getElementById("downloadBtn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      const dropdown = e.target.nextElementSibling;
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
     });
   });
 }
