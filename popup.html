@@ -49,10 +49,15 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
-      padding: 10px;
+      padding: 15px 20px;
       background-color: white;
-      border-radius: 6px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .sort-group {
+      display: flex;
+      align-items: center;
     }
 
     #sort-container label {
@@ -108,56 +113,80 @@
       color: #666;
     }
 
-    footer {
-      padding: 20px;
-      text-align: right;
-    }
-
     button {
       padding: 10px 15px;
-      margin-left: 10px;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
       font-size: 14px;
       font-weight: 500;
-      transition: background-color 0.2s ease;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 100px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     #copyBtn {
-      background-color: #e0e0e0;
+      background-color: #f8f9fa;
       color: #333;
+      border: 1px solid #dee2e6;
     }
 
     #copyBtn:hover {
-      background-color: #d0d0d0;
+      background-color: #e9ecef;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
     }
 
     #downloadBtn {
       background-color: #5cb85c;
       color: white;
+      margin-left: 10px;
     }
 
     #downloadBtn:hover {
       background-color: #4cae4c;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
     }
 
-    .footer-actions {
+    .actions-group {
       display: flex;
-      justify-content: space-evenly;
+      align-items: center;
     }
 
     .button-wrapper {
-      text-align: center;
+      position: relative;
     }
 
     .feedback-msg {
-      display: block; /* Puts the message on its own line */
-      visibility: hidden; /* Hides it, but it still takes up layout space */
-      min-height: 1.2em; /* Ensures a minimum space is reserved */
-      margin-top: 4px; /* Space between button and message */
-      color: #5cb85c;
-      font-weight: 500;
+      position: absolute;
+      visibility: hidden;
+      background-color: #5cb85c;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .feedback-msg::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 8px;
+      height: 8px;
+      background-color: #5cb85c;
     }
   </style>
 </head>
@@ -170,30 +199,30 @@
 
     <main>
       <div id="sort-container">
-        <label for="sortBy"></label>
-        <select id="sortBy">
-          <option value="newest">Newest to Oldest</option>
-          <option value="oldest">Oldest to Newest</option>
-          <option value="alphabetical">Alphabetical</option>
-        </select>
+        <div class="sort-group">
+          <label for="sortBy">Sort by:</label>
+          <select id="sortBy">
+            <option value="newest">Newest to Oldest</option>
+            <option value="oldest">Oldest to Newest</option>
+            <option value="alphabetical">Alphabetical</option>
+          </select>
+        </div>
+        <div class="actions-group">
+          <div class="button-wrapper">
+            <button id="copyBtn">Copy</button>
+            <span id="copiedMsg" class="feedback-msg">Copied!</span>
+          </div>
+          <div class="button-wrapper">
+            <button id="downloadBtn">Download</button>
+            <span id="downloadedMsg" class="feedback-msg">Downloaded!</span>
+          </div>
+        </div>
       </div>
 
       <table id="wordsTable">
         <tbody></tbody>
       </table>
     </main>
-
-    <footer>
-      <div class="footer-actions">
-        <div class="button-wrapper">
-          <button id="copyBtn">Copy</button>
-          <span id="copiedMsg" class="feedback-msg">Copied!</span>
-        </div>
-        <div class="button-wrapper">
-          <button id="downloadBtn">Download</button><span id="downloadedMsg" class="feedback-msg">Downloaded!</span>
-        </div>
-      </div>
-    </footer>
   </div>
 
   <script src="popup.js"></script>

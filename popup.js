@@ -52,7 +52,6 @@ function tryExtractWords(tabId, attempt) {
     // Hide the message container and show the main content
     document.getElementById("message-container").style.display = "none";
     document.querySelector("main").style.display = "block";
-    document.querySelector("footer").style.display = "block";
     document.querySelector("#sort-container").style.display = "flex";
     
     const tableBody = document.querySelector("#wordsTable tbody");
@@ -136,7 +135,6 @@ function displayMessage(message, isLoading = false) {
   // Hide main content only if not in loading state
   if (!isLoading) {
     document.querySelector("main").style.display = "none";
-    document.querySelector("footer").style.display = "none";
     document.querySelector("#sort-container").style.display = "none";
   }
 }
