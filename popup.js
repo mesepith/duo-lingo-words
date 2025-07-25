@@ -108,7 +108,13 @@ function tryExtractWords(tabId, attempt) {
 
         switch (format) {
           case 'txt':
-            content = 'Word\tMeaning\n' + currentRows.map(row => `${row.word}\t${row.meaning}`).join('\n');
+            content = 'DuoLingo Words List\n';
+            content += '=================\n\n';
+            content += currentRows.map(row => {
+              return `Word: ${row.word}\n` +
+                     `Meaning: ${row.meaning}\n` +
+                     '----------------------------------------\n';
+            }).join('\n');
             mimeType = 'text/plain';
             break;
           case 'csv':
