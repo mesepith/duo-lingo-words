@@ -49,7 +49,7 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
-      padding: 12px 16px;
+      padding: 12px 18px 12px 12px;
       background-color: white;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -59,28 +59,30 @@
     .sort-group {
       display: flex;
       align-items: center;
-      margin-right: 10px;
+      margin-right: 0px;
+      margin-left: -8px;
     }
 
     #sort-container label {
-      margin-right: 10px;
+      margin-right: 14px;
       font-weight: 500;
       color: #555;
     }
 
     #sortBy {
-      padding: 10px 12px;
+      padding: 8px 8px;
       font-size: 14px;
       border: 1px solid #ddd;
-      border-radius: 4px;
+      border-radius: 6px;
       background-color: #f9f9f9;
       background-image: url("data:image/svg+xml;utf8,<svg fill='currentColor' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
       background-repeat: no-repeat;
-      background-position: right -5px center;
+      background-position: right 8px center;
       cursor: pointer;
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
+      min-width: 120px;
     }
 
     table {
@@ -116,7 +118,7 @@
     }
 
     button {
-      padding: 8px 12px;
+      padding: 8px 19px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
@@ -206,8 +208,8 @@
         <div class="sort-group">
           <label for="sortBy"></label>
           <select id="sortBy">
-            <option value="newest">Newest to Oldest</option>
-            <option value="oldest">Oldest to Newest</option>
+            <option value="newest">New to Old</option>
+            <option value="oldest">Old to New</option>
             <option value="alphabetical">Alphabetical</option>
           </select>
         </div>
