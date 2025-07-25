@@ -107,6 +107,9 @@ function tryExtractWords(tabId, attempt) {
         let content = '';
         let mimeType = '';
         let fileName = `duolingo_words.${format}`;
+        
+        // Close the dropdown when an option is clicked
+        document.querySelector('.download-dropdown').style.display = 'none';
 
         switch (format) {
           case 'txt':
