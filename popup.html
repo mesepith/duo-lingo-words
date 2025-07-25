@@ -222,7 +222,8 @@
     }
 
     .download-option {
-      display: block;
+      display: flex;
+      align-items: center;
       width: 100%;
       padding: 12px 16px;
       text-align: left;
@@ -234,6 +235,14 @@
       font-size: 14px;
       transition: all 0.2s ease;
       min-width: auto;
+      gap: 12px;
+    }
+
+    .download-icon {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      flex-shrink: 0;
     }
 
     .download-option:hover {
@@ -241,6 +250,10 @@
       color: #5cb85c;
       transform: none;
       box-shadow: none;
+    }
+
+    .download-option span {
+      flex-grow: 1;
     }
 
     .download-option:not(:last-child) {
@@ -273,9 +286,18 @@
           <div class="button-wrapper download-wrapper">
             <button id="downloadBtn">Download</button>
             <div class="download-dropdown">
-              <button class="download-option" data-format="txt">Text (.txt)</button>
-              <button class="download-option" data-format="csv">Excel (.csv)</button>
-              <button class="download-option" data-format="xlsx">Excel (.xlsx)</button>
+              <button class="download-option" data-format="txt">
+                <img src="icon/download_txt_120by80.png" alt="TXT" class="download-icon">
+                <span>Text (.txt)</span>
+              </button>
+              <button class="download-option" data-format="csv">
+                <img src="icon/download_csv_120by80.png" alt="CSV" class="download-icon">
+                <span>Excel (.csv)</span>
+              </button>
+              <button class="download-option" data-format="xlsx">
+                <img src="icon/download_xlsx_120by80.png" alt="XLSX" class="download-icon">
+                <span>Excel (.xlsx)</span>
+              </button>
             </div>
             <span id="downloadedMsg" class="feedback-msg">Downloaded!</span>
           </div>

@@ -101,7 +101,9 @@ function tryExtractWords(tabId, attempt) {
     // Handle downloads in different formats
     document.querySelectorAll('.download-option').forEach(button => {
       button.addEventListener('click', (e) => {
-        const format = e.target.dataset.format;
+        // Get the button element (either the clicked element or its parent if an image/span was clicked)
+        const button = e.target.closest('.download-option');
+        const format = button.dataset.format;
         let content = '';
         let mimeType = '';
         let fileName = `duolingo_words.${format}`;
