@@ -4,11 +4,17 @@ A lightweight Chrome extension that extracts vocabulary words and their meanings
 
 ## ✨ Features
 
-- 📋 Extracts words and meanings directly from Duolingo pages
-- ✅ Clean table view in popup
-- 📎 Copy words and meanings to clipboard (with ✅ feedback)
-- 📥 Download the extracted words as an Excel-compatible CSV
-- 🌐 Works across different languages (not just Spanish)
+- 🔄 **Auto-redirect**: Works from any website - automatically navigates to Duolingo words page
+- 📋 **Smart extraction**: Extracts words and meanings directly from Duolingo with retry logic
+- 🗂️ **Sortable table**: View words sorted by newest, oldest, or alphabetical order
+- 📎 **One-click copy**: Copy all words to clipboard in tab-separated format with visual feedback
+- 📥 **Multiple download formats**:
+  - Text (.txt) with formatted styling
+  - CSV (.csv) for Excel and spreadsheets
+  - XLSX (.xlsx) Excel-compatible format
+- ✅ **Visual feedback**: Instant confirmation for copy and download actions
+- 🌐 **Multi-language support**: Works across different Duolingo language courses
+- 🎯 **Clean UI**: Modern, responsive popup interface with hover effects
 
 ## 📦 Installation
 
