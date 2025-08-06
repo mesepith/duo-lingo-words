@@ -30,14 +30,20 @@ A lightweight Chrome extension that extracts vocabulary words and their meanings
 
 
 ## 📁 Project Structure
-/duo-lingo-word-extractor
+```
+duo-lingo-words/
+├── README.md
 ├── manifest.json
 ├── popup.html
 ├── popup.js
-├── /icon
-│ ├── icon_16x16.png
-│ ├── icon_48x48.png
-│ └── icon_128x128.png
+└── icon/
+    ├── download_csv_120by80.png
+    ├── download_txt_120by80.png
+    ├── download_xlsx_120by80.png
+    ├── icon_16x16.png
+    ├── icon_48x48.png
+    └── icon_128x128.png
+```
 
 
 ## 🧠 Tech Stack
