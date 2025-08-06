@@ -20,13 +20,24 @@ A lightweight Chrome extension that extracts vocabulary words and their meanings
 
 ## 🔍 How to Use
 
-1. Visit [https://www.duolingo.com/practice-hub/words](https://www.duolingo.com/practice-hub/words)
-2. Click the extension icon in the Chrome toolbar
-3. The extension will extract all words and their meanings
-4. View the data in a clean table
-5. Use:
-   - **Copy** to copy the list to your clipboard
-   - **Download as Excel** to save the words as a CSV file
+1. **On any website**: Click the extension icon in the Chrome toolbar
+   - If you're not on Duolingo, it will automatically redirect you to the words page
+   - If you're on Duolingo but not the words page, it will redirect you there
+   - If you're already on the words page, it will start extracting immediately
+
+2. **Wait for extraction**: The extension will automatically extract all words and meanings
+   - Shows loading progress with retry attempts if needed
+   - Displays words in a clean, sortable table
+
+3. **Use the features**:
+   - **Sort**: Choose from "New to Old", "Old to New", or "Alphabetical"
+   - **Copy**: Copies all words and meanings to clipboard (tab-separated format)
+   - **Download**: Choose from multiple formats:
+     - **Text (.txt)** - Formatted text file with styling
+     - **Excel (.csv)** - CSV format for spreadsheet applications
+     - **Excel (.xlsx)** - Excel-compatible format
+
+4. **Visual feedback**: Get instant confirmation when copying or downloading
 
 
 ## 📁 Project Structure
