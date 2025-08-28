@@ -110,7 +110,7 @@ duo-lingo-words/
 - 📊 **SheetJS Integration**: Native XLSX generation
 - 🚀 **Performance**: Lazy loading for large word lists
 - 🔒 **Data Privacy**: Local storage with encryption options
-- 🌐 **i18n Support**: Multi-language interface
+- 🌐 **i18n Support**: Multi-language interface.
 
 ## 🤝 Contributing
 
